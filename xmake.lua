@@ -16,7 +16,7 @@ if is_mode("debug") then
     set_symbols("debug")
     set_optimize("none")
     set_warnings("all")
-    set_policy("build.optimization.lto", false)
+    set_policy("build.optimization.lto", true)
 
     vsRuntime = vsRuntime.."d"
 elseif is_mode("releasedbg") then
@@ -50,7 +50,7 @@ add_requires("tiltedcore 0.2.7")
 add_requires("sqlite3")
 add_requires("xbyak")
 add_requires("stb")
-add_requires("sol2", { configs = { includes_lua = false } })
+add_requires("sol2", { configs = { includes_lua = true } })
 add_requires("openrestry-luajit", { configs = { gc64 = true } })
 
 local imguiUserConfig = string.gsub(path.absolute("src/imgui_impl/imgui_user_config.h"), "\\", "/")
@@ -60,7 +60,7 @@ target("RED4ext.SDK")
     set_kind("headeronly")
     set_group("vendor")
     add_headerfiles("vendor/RED4ext.SDK/include/**.hpp")
-    add_includedirs("vendor/RED4ext.SDK/include/", { public = true })
+    add_includedirs("vendor/RED4ext.SDK/include/", { public = false })
     on_install(function() end)
 
 target("cyber_engine_tweaks")
